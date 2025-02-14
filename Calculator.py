@@ -4,7 +4,6 @@ Created on Sat Feb 15 00:10:08 2025
 
 @author: haoooyu
 """
-
 import tkinter as tk
 
 class Calculator:
@@ -28,7 +27,7 @@ class Calculator:
             
         if current_text and text == "." and "." in current_text.split()[-1]:
             return
-            
+        #add the text into the entry
         self.entry.insert(tk.END, text)
         
     def scientific_operate(self, operator):
@@ -70,15 +69,20 @@ class Calculator:
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text == "AC":
-                button = tk.Button(self.root, text = text, width = 6, height = 2, command = self.clean_entry)
+                button = tk.Button(self.root, text = text, width = 6, height = 2, 
+                                   fg = "red",
+                                   command = self.clean_entry)
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text == "delete":
-                button = tk.Button(self.root, text = text, width = 6, height = 2, command = self.delete_last_character)
+                button = tk.Button(self.root, text = text, width = 6, height = 2, 
+                                   fg = "red",
+                                   command = self.delete_last_character)
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text == "=":
-                button = tk.Button(self.root, text = text, width = 6, height = 2, command = self.operate)
+                button = tk.Button(self.root, text = text, width = 6, height = 2,
+                                   command = self.operate)
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
 
 Calculator()
