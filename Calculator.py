@@ -33,9 +33,15 @@ class Calculator:
     def scientific_operate(self, operator):
         #other group member's part
         pass
+        #it will delete the text in entry and only display result
+        self.entry.delete(0.tk.END)
+        self.entry.insert(tk.END, result)
     def operate(self):
         #other group member's part
         pass
+        #it will delete the text in entry and only display result
+        self.entry.delete(0.tk.END)
+        self.entry.insert(tk.END, result)
     #clean the entry when users press "AC"
     def clean_entry(self):
         self.entry.delete(0, tk.END)
