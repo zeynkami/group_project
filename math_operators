@@ -1,0 +1,51 @@
+import math  #Importing math module
+
+#Basic math functions
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero."
+    return a / b
+
+#Trigonometry functions
+def sine(x):
+    return math.sin(math.radians(x))
+
+def cosine(x):
+    return math.cos(math.radians(x))
+
+def tangent(x):
+    return math.tan(math.radians(x))
+
+def arcsin(x):
+    if -1 <= x <= 1:
+        return math.degrees(math.asin(x))
+    else:
+        return "Error: Input out of range"
+
+def arccos(x):
+    if -1 <= x <= 1: 
+        return math.degrees(math.acos(x))
+    else:
+        return "Error: Input out of range"
+
+def arctan(x):
+    return math.degrees(math.atan(x))
+
+# Power and square root functions
+def square(x):
+    return x * x
+
+def square_root(x):
+    if x < 0:
+        return "Error: Cannot find square root of negative number"
+    return math.sqrt(x)
+
