@@ -24,24 +24,48 @@ class Calculator:
     #append something which is pressed by users to the entry
     def append_entry(self,text):
         current_text = self.entry.get()
-            
+        
+        #prevent adding ")"before"("
+        if text == ")" and current_text.count("(") <= current_text.count(")"):
+            return
+        
+        #ensure every numbers only have one "."
         if current_text and text == "." and "." in current_text.split()[-1]:
             return
+        
         #add the text into the entry
         self.entry.insert(tk.END, text)
         
     def scientific_operate(self, operator):
+        current_text = self.entry.get()
+        
+        try:
+        
         #other group member's part
-        pass
+        
         #it will delete the text in entry and only display result
         self.entry.delete(0.tk.END)
         self.entry.insert(tk.END, result)
+        
+        except Exception:
+            self.entry.delete(0, tk.END)
+            self.entry.insert(tk.END, "Error")
+            
+
     def operate(self):
-        #other group member's part
-        pass
+        current_text = self.entry.get()
+        try:
+            
+            #other group member's part
+            
         #it will delete the text in entry and only display result
         self.entry.delete(0.tk.END)
         self.entry.insert(tk.END, result)
+        
+        except Exception:
+            self.entry.delete(0, tk.END)
+            self.entry.insert(tk.END, "Error")
+            
     #clean the entry when users press "AC"
     def clean_entry(self):
         self.entry.delete(0, tk.END)
