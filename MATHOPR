@@ -1,0 +1,73 @@
+import math  # Importing math module
+
+# Trigonometry functions
+def sine(x):
+    return math.sin(math.radians(x))
+
+def cosine(x):
+    return math.cos(math.radians(x))
+
+def tangent(x):
+    return math.tan(math.radians(x))
+
+def arcsin(x):
+    if -1 <= x <= 1:
+        return math.degrees(math.asin(x))
+    else:
+        return "Error: Input out of range"
+
+def arccos(x):
+    if -1 <= x <= 1: 
+        return math.degrees(math.acos(x))
+    else:
+        return "Error: Input out of range"
+
+def arctan(x):
+    return math.degrees(math.atan(x))
+
+# Power and square root functions
+def square(x):
+    return x * x
+
+def square_root(x):
+    if x < 0:
+        return "Error: Cannot find square root of negative number"
+    return math.sqrt(x)
+
+# Basic Arithmetic Functions
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y == 0:
+        return "Error: Division by zero"
+    return x / y
+
+# Function to perform calculations
+def operate(expression):
+    try:
+        # Defining a safe dictionary for eval
+        safe_dict = {
+            "sin": sine, "cos": cosine, "tan": tangent,
+            "asin": arcsin, "acos": arccos, "atan": arctan,
+            "sqrt": square_root, "square": square,
+            "add": add, "sub": subtract, "mul": multiply, "div": divide,
+            "math": math
+        }
+
+        # Evaluate the expression safely
+        result = eval(expression, {"__builtins__": None}, safe_dict)
+        return result
+    except Exception as e:
+        return f"Error: {e}"
+
+# Example usage:
+if __name__ == "__main__":
+    expr = input("Enter an expression (e.g., add(3,4), div(10,2), sin(30)): ")
+    print("Result:", operate(expr))
