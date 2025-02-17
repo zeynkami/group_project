@@ -1,0 +1,41 @@
+import math  #Importing math module
+
+
+def operate ():
+    current_text = ""
+    result = eval(current_text)
+
+#Trigonometry functionss
+def sine(x):
+    return math.sin(math.radians(x))
+
+def cosine(x):
+    return math.cos(math.radians(x))
+
+def tangent(x):
+    return math.tan(math.radians(x))
+
+def arcsin(x):
+    if -1 <= x <= 1:
+        return math.degrees(math.asin(x))
+    else:
+        return "Error: Input out of range"
+
+def arccos(x):
+    if -1 <= x <= 1: 
+        return math.degrees(math.acos(x))
+    else:
+        return "Error: Input out of range"
+
+def arctan(x):
+    return math.degrees(math.atan(x))
+
+# Power and square root functions
+def square(x):
+    return x * x
+
+def square_root(x):
+    if x < 0:
+        return "Error: Cannot find square root of negative number"
+    return math.sqrt(x)
+
