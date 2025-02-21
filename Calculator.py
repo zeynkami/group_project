@@ -1,71 +1,76 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Feb 15 00:10:08 2025
+Created on Fri Feb 21 22:21:23 2025
 
 @author: haoooyu
 """
+
 import tkinter as tk
+import math
 
 class Calculator:
     def __init__(self,):
         self.root = tk.Tk()
         self.root.title("CACULATOR")
+        #create button
         
         #create entry
         self.entry = tk.Entry(self.root, width=30, font=("Arial", 20), borderwidth=5, justify="right")
         self.entry.grid(row=0, column=0, columnspan=4, padx=5, pady=5, sticky="nsew")
         
-        #create button
         self.button = self.build_button()
-        
-        #lunch the window
         self.root.mainloop()
-        
     #append something which is pressed by users to the entry
     def append_entry(self,text):
         current_text = self.entry.get()
-        
-        #prevent adding ")"before"("
-        if text == ")" and current_text.count("(") <= current_text.count(")"):
-            return
-        
-        #ensure every numbers only have one "."
+            
         if current_text and text == "." and "." in current_text.split()[-1]:
             return
-        
-        #add the text into the entry
+            
         self.entry.insert(tk.END, text)
         
     def scientific_operate(self, operator):
-        current_text = self.entry.get()
-        
         try:
-        
-        #other group member's part
-        
-        #it will delete the text in entry and only display result
-        self.entry.delete(0.tk.END)
-        self.entry.insert(tk.END, result)
-        
-        except Exception:
-            self.entry.delete(0, tk.END)
-            self.entry.insert(tk.END, "Error")
-            
+            current_text = self.entry.get()
+            num = float(current_text)  # Convert input to float
+            result = ""
 
-    def operate(self):
-        current_text = self.entry.get()
-        try:
-            
-            #other group member's part
-            
-        #it will delete the text in entry and only display result
-        self.entry.delete(0.tk.END)
-        self.entry.insert(tk.END, result)
-        
+            # Perform the requested operation
+            if operator == "sin":
+                result = math.sin(math.radians(num))
+            elif operator == "cos":
+                result = math.cos(math.radians(num))
+            elif operator == "tan":
+                result = math.tan(math.radians(num))
+            elif operator == "arcsin":
+                result = math.degrees(math.asin(num))
+            elif operator == "arccos":
+                result = math.degrees(math.acos(num))
+            elif operator == "arctan":
+                result = math.degrees(math.atan(num))
+            elif operator == "sqrt":
+                result = math.sqrt(num)
+            elif operator == "square":
+                result = num ** 2
+
+            # Clear entry and display result
+            self.entry.delete(0, tk.END)
+            self.entry.insert(tk.END, str(result))
+
         except Exception:
             self.entry.delete(0, tk.END)
             self.entry.insert(tk.END, "Error")
             
+    #operate the basic operation
+    def operate(self):
+        try:
+            result = eval(self.entry.get())  # ⚠️ Be careful using eval()
+            self.entry.delete(0, tk.END)
+            self.entry.insert(tk.END, str(result))
+        except Exception:
+            self.entry.delete(0, tk.END)
+            self.entry.insert(tk.END, "Error")
     #clean the entry when users press "AC"
     def clean_entry(self):
         self.entry.delete(0, tk.END)
@@ -76,7 +81,7 @@ class Calculator:
         if current_text:
             self.entry.delete(len(current_text)-1)
         
-    #build the button. while pressing the button, call the function
+    #build the button
     def build_button(self):
         button_text = [
                       ("sin", 1, 0), ("cos", 1, 1), ("tan", 1, 2),("square", 1, 3),
@@ -95,24 +100,19 @@ class Calculator:
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text in scientific_text:
-                button = tk.Button(self.root, text = text, width = 6, height = 2, command = lambda operator = text: self.scientific_operate(operator))
+                button = tk.Button(self.root, text = text, width = 6, height = 2, command = lambda operator = text: self.scientfic_operate(operator))
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text == "AC":
-                button = tk.Button(self.root, text = text, width = 6, height = 2, 
-                                   fg = "red",
-                                   command = self.clean_entry)
+                button = tk.Button(self.root, text = text, width = 6, height = 2, fg = "red", command = self.clean_entry)
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text == "delete":
-                button = tk.Button(self.root, text = text, width = 6, height = 2, 
-                                   fg = "red",
-                                   command = self.delete_last_character)
+                button = tk.Button(self.root, text = text, width = 6, height = 2, fg= "red", command = self.delete_last_character)
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
                 
             elif text == "=":
-                button = tk.Button(self.root, text = text, width = 6, height = 2,
-                                   command = self.operate)
+                button = tk.Button(self.root, text = text, width = 6, height = 2, command = self.operate)
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
 
 Calculator()
