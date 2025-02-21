@@ -27,7 +27,11 @@ class Calculator:
             
         if current_text and text == "." and "." in current_text.split()[-1]:
             return
-            
+        
+        #prevent adding ")"before"("
+        if text == ")" and current_text.count("(") <= current_text.count(")"):
+            return
+
         self.entry.insert(tk.END, text)
         
     def scientific_operate(self, operator):
@@ -65,7 +69,7 @@ class Calculator:
     #operate the basic operation
     def operate(self):
         try:
-            result = eval(self.entry.get())  # ⚠️ Be careful using eval()
+            result = eval(self.entry.get())
             self.entry.delete(0, tk.END)
             self.entry.insert(tk.END, str(result))
         except Exception:
